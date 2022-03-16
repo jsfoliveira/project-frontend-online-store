@@ -9,7 +9,7 @@ describe(`13 - Mostre junto ao ícone do carrinho a quantidade de produtos dentr
     global.fetch.mockClear();
   });
 
-  it('Vê a quantidade de produtos no carrinho da tela de listagem', async () => {
+  it.only('Vê a quantidade de produtos no carrinho da tela de listagem', async () => {
 
     jest.spyOn(global, 'fetch').mockImplementation(mockFetch)
     render(<App />);
@@ -18,6 +18,7 @@ describe(`13 - Mostre junto ao ícone do carrinho a quantidade de produtos dentr
     await waitFor(() => expect(global.fetch).toHaveBeenCalledTimes(2));
     fireEvent.click(screen.getAllByTestId('product-add-to-cart')[0]);
     fireEvent.click(screen.getAllByTestId('product-add-to-cart')[1]);
+    screen.debug()
     expect(screen.getByTestId('shopping-cart-size')).toHaveTextContent('2');
   });
 
